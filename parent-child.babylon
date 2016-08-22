@@ -173,7 +173,7 @@
 {"frame":61,"values":[1,1,1]},
 {"frame":85,"values":[1,1,1]}],"loopBehavior":1,"name":"scaling animation","property":"scaling"}],"ranges":[{"name":"Action","from":0,"to":25},{"name":"BezierCircleAction","from":30,"to":55},{"name":"CubeAction","from":60,"to":85}],"autoAnimate":true,"autoAnimateFrom":1,"autoAnimateTo":85,"autoAnimateLoop":true
 ,"instances":[]}
-,{"name":"Plane","id":"Plane","parentId":"Cube","materialId":"parent_child.Material","billboardMode":0,"position":[0,0.1557,-1.9911],"rotation":[1.5708,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false
+,{"name":"Plane","id":"Plane","parentId":"Cube","materialId":"parent_child.Material","billboardMode":0,"position":[0,2.1197,0],"rotation":[0,0,0],"scaling":[1,1,1],"isVisible":true,"freezeWorldMatrix":false,"isEnabled":true,"checkCollisions":false,"receiveShadows":false
 ,"positions":[1,0,-1,1,0,1,-1,0,1,-1,0,-1]
 ,"normals":[0,1,0,0,1,0,0,1,0,0,1,0]
 ,"indices":[0,1,2,3,0,2]
@@ -366,6 +366,6 @@
 ,"instances":[]}
 ],
 "cameras":[{"name":"Camera","id":"Camera","position":[7.4811,5.3437,-6.5076],"rotation":[0.4615,-0.8149,0.0108],"fov":0.8576,"minZ":0.1,"maxZ":100,"speed":1,"inertia":0.9,"checkCollisions":false,"applyGravity":false,"ellipsoid":[0.2,0.9,0.2],"cameraRigMode":0,"interaxial_distance":0.0637,"type":"FreeCamera"}],"activeCamera":"Camera",
-"lights":[{"name":"Lamp","id":"Lamp","type":0,"parentId":"Plane","position":[4.0762,2.3238,1.0055],"intensity":1,"diffuse":[1,1,1],"specular":[1,1,1]}],
+"lights":[{"name":"Lamp","id":"Lamp","type":0,"parentId":"Plane","position":[4.0762,5.9039,1.0055],"intensity":1,"diffuse":[1,1,1],"specular":[1,1,1]}],
 "shadowGenerators":[]
 }
