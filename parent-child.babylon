@@ -40,6 +40,6 @@
 ,"instances":[]}
 ],
 "cameras":[{"name":"Camera","id":"Camera","position":[7.4811,5.3437,-6.5076],"rotation":[0.4615,-0.8149,0.0108],"fov":0.8576,"minZ":0.1,"maxZ":100,"speed":1,"inertia":0.9,"checkCollisions":false,"applyGravity":false,"ellipsoid":[0.2,0.9,0.2],"cameraRigMode":0,"interaxial_distance":0.0637,"type":"FreeCamera"}],"activeCamera":"Camera",
-"lights":[{"name":"Lamp","id":"Lamp","type":2,"position":[4.0762,5.9039,1.0055],"direction":[-0.5664,-0.7947,-0.2184],"angle":1.309,"exponent":0.3,"intensity":1,"diffuse":[1,1,1],"specular":[1,1,1]}],
+"lights":[{"name":"Lamp","id":"Lamp","type":2,"position":[4.0762,5.9039,1.0055],"direction":[-0.5664,-0.7947,-0.2184],"angle":0.7854,"exponent":0.8895,"range":7,"intensity":1,"diffuse":[1,1,1],"specular":[1,1,1]}],
 "shadowGenerators":[{"mapSize":512,"lightId":"Lamp","bias":0,"usePoissonSampling":true,"renderList":[]}]
 }
