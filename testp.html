@@ -36,8 +36,8 @@ var createScene = function () {
     var scene = new BABYLON.Scene(engine);
 		scene.clearColor = new BABYLON.Color3(0.1, 0.1, 0.1)
 
-	 var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -550), scene);
-   	 	camera.setTarget(BABYLON.Vector3.Zero());
+	 var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -50), scene);
+   	 	camera.setTarget(new BABYLON.Vector3(0, 5, -550));
     	camera.attachControl(canvas, true);
 		camera.maxZ =500;
 		camera.layerMask = 0x20000000;
