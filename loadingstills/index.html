@@ -17,19 +17,20 @@
          touch-action: none;
       }
    </style>
-   <script src="https://cdn.rawgit.com/BabylonJS/Babylon.js/master/dist/previous%20releases/babylon.2.0.js
-   "></script>
+   <script src="https://cdn.rawgit.com/BabylonJS/Babylon.js/master/dist/previous%20releases/babylon.2.0.js"></script>
 </head>
 <body>
    <canvas id="renderCanvas"></canvas>
    <script type="text/javascript">
+	   
 var canvas = document.querySelector("#renderCanvas");
 var engine = new BABYLON.Engine(canvas, true);
 	 
 var createScene = function () {
 	
 var scene = new BABYLON.Scene(engine);
-//i call the renderLoop here, its an experiment, in the most tutorials you will see it elsewhere.
+	
+//i call the renderLoop here, it's an experiment, in the most tutorials you will see it elsewhere.
 engine.runRenderLoop(function () {scene.render();});
 		   
 var camera = new BABYLON.ArcRotateCamera("camera1",-1.57,0,8, new BABYLON.Vector3.Zero(), scene);
@@ -50,18 +51,20 @@ for (var i = 10000; i <= 10250; i++)
 
 	var c = 0, count = 0.1;
 	scene.beforeRender = function() {
+		
 	//for fine tuning i'm going with float
 	if(count>0.26 ){ count=0.1;
 			
 		material.diffuseTexture = scene.textures[c++];
 		videoplane.material = material;
+			
 		//if all frames are counted, we done	
 		if (c == 251)  music1.stop();
+			
 		}  count+=0.1;
 	    }
-   	});
-  
-	};
+   	});//End of executeWhenReady 
+  };
 createScene();
    </script>
 </body>
