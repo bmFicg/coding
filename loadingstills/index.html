@@ -29,10 +29,12 @@ var engine = new BABYLON.Engine(canvas, true);
 var createScene = function () {
 	
 var scene = new BABYLON.Scene(engine);
+//i call the renderLoop here, its an experiment, in the most tutorials you will see it elsewhere.
 engine.runRenderLoop(function () {scene.render();});
 		   
 var camera = new BABYLON.ArcRotateCamera("camera1",-1.57,0,8, new BABYLON.Vector3.Zero(), scene);
-  
+
+//pre-buffering the frames
 for (var i = 10000; i <= 10250; i++) 
 	 var tex = [new BABYLON.Texture("stills/" + i + ".jpg", scene, false, true, 0, null, null, null, true)]
 
@@ -41,22 +43,25 @@ for (var i = 10000; i <= 10250; i++)
 	var music1 = new BABYLON.Sound(null, "8-bitdesign.mp3", scene, function soundg(){ music1.play();}, { loop: false, playbackRate :1});
 
 	var material = new BABYLON.StandardMaterial("texture1", scene);
+	   //just a plane and with emissiveColor no lights needed, keep the scene simple
 	    material.emissiveColor = new BABYLON.Color3(1, 1, 1);
 
     var videoplane = BABYLON.Mesh.CreateGround("ground1", 3 * 2, 3, 2, scene);
 
 	var c = 0, count = 0.1;
 	scene.beforeRender = function() {
+	//for fine tuning i'm going with float
 	if(count>0.26 ){ count=0.1;
+			
 		material.diffuseTexture = scene.textures[c++];
 		videoplane.material = material;
+		//if all frames are counted, we done	
 		if (c == 251)  music1.stop();
 		}  count+=0.1;
-	}
-	
-   });
+	    }
+   	});
   
-};
+	};
 createScene();
    </script>
 </body>
