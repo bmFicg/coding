@@ -50,7 +50,7 @@ void main(void) {
     
 	vec4 dv = texture2D( displacementMap, vUV );
 	
-	vec4 newVertexPos = vec4(vNormal * dv.tts*(0.1+(sin(time)-mod(sin(time),.8))), .1) + vPosition;
+	vec4 newVertexPos = vec4(vNormal * dv*(0.1+(sin(time)-mod(sin(time),.8))), .1) + vPosition;
 
     gl_Position = worldViewProjection * newVertexPos;
 	
