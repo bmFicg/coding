@@ -20,10 +20,6 @@ function run() {
         camera.lowerRadiusLimit = 1;
         camera.minZ = 1.0;
 
-    var background = new BABYLON.Layer("back", null, scene);
-	    background.texture = new BABYLON.Texture("asserts/textures/runderkreis.jpg", scene, false);
-	    background.isBackground = true;
-	    background.texture.level = 0;
  BABYLON.Effect.ShadersStore["customVertexShader"]=`precision highp float;
 
 // Attributes
