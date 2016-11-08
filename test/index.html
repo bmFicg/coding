@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Babylon.js - CYOS</title>
+    <script src="http://www.babylonjs.com/hand.minified-1.2.js"></script>
+    <script src="http://www.babylonjs.com/babylon.js"></script>
+	 <src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+    <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="fileSaver.js"></script>
+    <script src="jszip.min.js"></script>
+<style>
+  html, body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #renderCanvas {
+    width: 50%;
+	
+    height: 100%;
+    touch-action: none;
+	float:right;
+    
+  }
+  textarea {
+   float:left;
+
+  width: 20%;
+}
+</style>
+
+<body>
+
+
+<textarea name="my-xml-editor" data-editor="xml" rows="15"></textarea>
+
+<textarea name="my-markdown-editor" data-editor="markdown" rows="15"></textarea>
+<canvas id="renderCanvas"> </canvas>
+</body>
+<script>
+    // Hook up ACE editor to all textareas with data-editor attribute
+    $(function () {
+        $('textarea[data-editor]').each(function () {
+            var textarea = $(this);
+            var mode = textarea.data('editor');
+            var editDiv = $('<div>', {
+                position: 'absolute',
+                width: textarea.width(),
+                height: textarea.height(),
+                'class': textarea.attr('class')
+            }).insertBefore(textarea);
+            textarea.css('visibility', 'hidden');
+			ace.require("ace/ext/language_tools");
+            var editor = ace.edit(editDiv[0]);
+            editor.renderer.setShowGutter(false);
+            editor.getSession().setValue(textarea.val());
+            editor.getSession().setMode("ace/mode/glsl");
+             editor.setTheme("ace/theme/idle_fingers");
+            editor.setTheme("ace/theme/tomorrow");
+            // copy back to textarea on form submit...
+            textarea.closest('form').submit(function () {
+                textarea.val(editor.getSession().getValue());
+            })
+        });
+    });
+</script>
+<script src="./show_own_source.js"></script>-
+</html>
