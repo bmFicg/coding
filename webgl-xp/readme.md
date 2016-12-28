@@ -1,2 +1,2 @@
-I recatly get into WebGL  
-here are some scetched that i did based on tutorials
+Recently get more into WebGL  
+here are some scetches i did based on tutorials
