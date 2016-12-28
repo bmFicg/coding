@@ -6,7 +6,7 @@
   <body style='margin:0px'>
     <canvas id='c' style='position: absolute; background-color: black;'></canvas>
   </body>
-   < script >
+   <script>
        function run() {
            var e = document.getElementById("c");
            e.width = window.innerWidth, e.height = window.innerHeight;
@@ -65,13 +65,13 @@
            L.translateZ(D, -8), L.translateY(D, -3);
            var B = function(e) {
                    var t = new Image;
-             t.crossOrigin = "anonymous";
+                       t.crossOrigin = "anonymous";
                    return t.src = e, t.webglTexture = !1, t.onload = function(e) {
                        var n = T.createTexture();
                        T.pixelStorei(T.UNPACK_FLIP_Y_WEBGL, !0), T.bindTexture(T.TEXTURE_2D, n), T.texImage2D(T.TEXTURE_2D, 0, T.RGBA, T.RGBA, T.UNSIGNED_BYTE, t), T.texParameteri(T.TEXTURE_2D, T.TEXTURE_MAG_FILTER, T.LINEAR), T.texParameteri(T.TEXTURE_2D, T.TEXTURE_MIN_FILTER, T.NEAREST_MIPMAP_LINEAR), T.generateMipmap(T.TEXTURE_2D), T.bindTexture(T.TEXTURE_2D, null), t.webglTexture = n
                    }, t
                },
-               P = B("https://crossorigin.me/https://rawgit.com/tolkanabroski/coding/master/webgl-xp/simpelpage/diffuse.jpg");
+               P = B("https://rawgit.com/tolkanabroski/coding/master/webgl-xp/simpelpage/diffuse.jpg");
            T.enable(T.DEPTH_TEST), T.depthFunc(T.LEQUAL), T.clearColor(0, 0, 0, 0), T.clearDepth(1);
            var S = 0,
                X = function(t) {
