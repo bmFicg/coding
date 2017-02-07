@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'/>
+<script type="text/javascript">
+var main=function(){cnv=document.getElementById("c"),cnv.width=window.innerWidth,cnv.height=window.innerHeight,gl=cnv.getContext("webgl"),shrP=gl.createProgram(),get_shader=function(e,t){shader=gl.createShader(t),gl.shaderSource(shader,e),gl.compileShader(shader),gl.attachShader(shrP,shader)};get_shader(`attribute vec2 p;
+  varying vec2 vUv;
+  void main(void){
+    gl_Position=vec4(p,0.,1.);
+    vUv=p;
+    }`,35633),get_shader(`precision lowp
+float;
+varying vec2 vUv;
+uniform float t;
+void main() {
+    vec2 pos = vUv;
+    pos *= 42. + cos(t * 2.) * atan(t * 12., 3.);
+    float newp = pow(pos.x, 1.) * pow(pos.y, 1.);
+    newp += float(vec2(24.1, 24.1) * pow(cos(pos.y / pos.y) + sin(t * 3.) * 3., 4.) * pow(cos((pos.x - 1.) * pos.x - 2.) + cos(t) * 3., 4.));
+    .2 * tan(t) > .4 ? pos.x += pos.x * newp * pos.y : newp /= 1.;
+    float r = sin(pos.x + t * .5) + abs(sin(.123 * 3.1416)) * 12.5 * .5 * cos(atan(pos.y + tan(t), pos.x - 12.) * 12.612);
+    float col, light;
+    vec2 rot = vec2(.1, .1);
+    for (float i = 1.; i <= 155.; i += 5.) {
+        rot += vec2(.3 * cos(i / 8. + sin(t * 3.) * 3. / 2.), 6. * sin(i / 15. - cos(t) * -3. / 2.));
+        light = .5 + .5 * tan(t) > .02 ? col = smoothstep(r * 12. - pos.y, .1 / newp, 24. / r - pos.y) : light += .15 / distance(pos + rot.yx, -pos / newp * rot.x) + .15 / length(pos - rot.y + cos(rot.xy * .54)) + .15 / length(pos + rot.y - rot.yx);
+    }
+    light += 2.12 / length(pos - 1.4 * rot.x + rot.yx);
+    float eys = .05 / smoothstep(distance(fract(r * .1), .5 / r) * sin(t), .02 / r, .5);
+    col += col * eys - .8;
+    gl_FragColor = mix(vec4(vec3(col), 1.) / .6, vec4(1. - vec3(eys - .1, eys - .1, eys - .6), 1.), .25) + vec4(vec3(light - .2, light, light), 1.);
+}`,35632),gl.linkProgram(shrP),_p=gl.getAttribLocation(shrP,"p"),_time=gl.getUniformLocation(shrP,"t"),gl.enableVertexAttribArray(_p),gl.useProgram(shrP),TRI_V=gl.createBuffer(),gl.bindBuffer(34962,TRI_V),gl.bufferData(34962,new Float32Array([-1,-1,1,-1,1,1,-1,1]),35044),TRI_F=gl.createBuffer(),gl.bindBuffer(34963,TRI_F),gl.bufferData(34963,new Uint16Array([0,1,3,2]),35044),gl.vertexAttribPointer(_p,2,5126,0,8,0);var e=function(t){gl.uniform1f(_time,.001*t),gl.drawElements(5,4,5123,0),window.requestAnimationFrame(e)};e(0)}
+</script>
+<body style='margin:0' onload='main()'>
+<canvas id=c>
+</html>
