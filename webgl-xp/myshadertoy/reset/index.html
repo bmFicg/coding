@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'/>
 <script type="text/javascript">
-var main=function(){cnv=document.getElementById("c"),cnv.width=window.innerWidth,cnv.height=window.innerHeight,gl=cnv.getContext("webgl"),shrP=gl.createProgram(),get_shader=function(e,t){shader=gl.createShader(t),gl.shaderSource(shader,e),gl.compileShader(shader),gl.attachShader(shrP,shader)};get_shader(`attribute vec2 p;
+var main=function(){cnv=document.getElementById("c"),cnv.width=window.innerWidth-20.,cnv.height=window.innerHeight-20.,gl=cnv.getContext("webgl"),shrP=gl.createProgram(),get_shader=function(e,t){shader=gl.createShader(t),gl.shaderSource(shader,e),gl.compileShader(shader),gl.attachShader(shrP,shader)};get_shader(`attribute vec2 p;
   varying vec2 vUv;
   void main(void){
     gl_Position=vec4(p,0.,1.);
