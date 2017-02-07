@@ -5,4 +5,4 @@ shaderdoy
 https://www.shadertoy.com/view/4lcSW4
 
 raw - git
-https://cdn.rawgit.com/tolkanabroski/coding/master/webgl-xp/myshadertoy/reset/index.html
+https://cdn.rawgit.com/tolkanabroski/coding/ea9deacf/webgl-xp/myshadertoy/reset/index.html
