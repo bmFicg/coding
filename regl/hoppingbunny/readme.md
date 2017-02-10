@@ -1,3 +1,3 @@
-Cant get mipmap to work correctly
+
 preview
-https://cdn.rawgit.com/tolkanabroski/coding/master/regl/hoppingbunny/index.html
+https://cdn.rawgit.com/tolkanabroski/coding/master/regl/hoppingbunny/index-fixed.html
