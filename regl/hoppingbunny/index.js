@@ -10,9 +10,7 @@ const pixels = regl.texture()
 
 const wbunny = regl({
   frag: `precision mediump float;
-  void main() {
-    gl_FragColor++;
-  }`,
+  void main() {gl_FragColor++;}`,
    vert: `precision mediump float;
   attribute vec3 position;
   uniform mat4 view, projection;
@@ -61,8 +59,8 @@ const mmap = regl({
   uniforms: {
       texture: pixels,
     color: [1, 0, 0, .1],
-  //   width: regl.context('viewportWidth'),
-   // height: regl.context('viewportHeight'),
+  //width: regl.context('viewportWidth'),
+   //height: regl.context('viewportHeight'),
   },
 blend: {
     enable: true,
@@ -80,7 +78,7 @@ camera(() => {
       {
         depth: 1,color: [0.2, 0.2, 0.2, 1],
     })
-  //HERE----------- scopted functions if i delate them the page is still running?
+  //HERE----------- scopted functions if i remove the page is still running?
   wbunny(),mmap()
   //HERE-------------avoid mipmap generation
   pixels({
