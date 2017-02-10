@@ -1,6 +1,4 @@
-
 const regl = require('regl')()
-
 const bunny = require('bunny')
 const camera = require('regl-camera')(regl,{
   center:[0,2.5,0],
@@ -46,20 +44,16 @@ const mmap = regl({
   varying vec2 vUV;
   void main () {
    vUV.xy = position;
-        gl_Position = vec4(-1.0 + 2.0 * position*vec2(.5), 0, 1);
+        gl_Position = vec4(-1.+position, 0, 1);
   }`,
-
   attributes: {
-     position: regl.buffer([
+    position: regl.buffer([
     [1, 1],[1, -1],[-1, -1],
     [-1, -1],[-1, 1],[1, 1]
     ])
   },
-
   uniforms: {
-      texture: pixels,
-    color: [1, 0, 0, .1],
-
+      texture: pixels
   },
 blend: {
     enable: true,
@@ -70,17 +64,14 @@ blend: {
   },
   count: 6
 })
-
 regl.frame(()=>{
-camera(() => {
+camera((context) => {
     regl.clear(
       {
         depth: 1,color: [0.2, 0.2, 0.2, 1],
     })
-  wbunny(),mmap()
-  //HERE-------------avoid mipmap generation
-  pixels({
-    copy: true
-  })
+  //the bug: create texture after the projected plane was created
+  // wbunny(),mmap(),pixels({copy: true}),  
+  wbunny(),pixels({copy: true}),mmap()  
   })
 })
