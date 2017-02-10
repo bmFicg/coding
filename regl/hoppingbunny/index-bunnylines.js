@@ -1,5 +1,4 @@
 const regl = require('regl')()
-const mouse = require('mouse-change')()
 const bunny = require('bunny')
 const camera = require('regl-camera')(regl,{
 	center:[0,2.5,0],
