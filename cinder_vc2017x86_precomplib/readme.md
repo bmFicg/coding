@@ -8,7 +8,7 @@ And when the dependencies were up-to-date, back then Bresenham was experimenting
 <br />
 ###  Make sure you have a local copy of [Cinder 0.9.2dev](https://github.com/cinder/Cinder)
 ```bash 
-mkdir C:\[floder of your choice]\CinderDev
+mkdir C:\[folder of your choice]\CinderDev
 cd CinderDev
 git clone --recursive https://github.com/cinder/Cinder.git
 ```  
@@ -22,7 +22,7 @@ git clone --recursive https://github.com/cinder/Cinder.git
 => Confirm with yes!  
 ##### It is important that you don't change the path, it shold be: lib > x86 > debug /release folder > v141 > cinder.lib 
 > The build on my machine takes up to 1,6Gb. I uploading just the Debug/Release libraries make sure you choose the right settings in your Visual Studio Build Configruration  
->  DEBUG_ANGLE therefore is not supported  
+>  ###### DEBUG_ANGLE therefore is not supported  
 >  For reason of Githubs upload limitations (25Mb per file) i hosted the files on mediafire  
 http://www.mediafire.com/file/5lcmz2p24d778dh/cinder_vc2017x86_precomplib.zip  
 
