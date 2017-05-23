@@ -20,7 +20,8 @@ PMatrix3D modelview = new PMatrix3D();
 
 void setup(){
   size(856,480,P3D);
- 
+  
+  //overloading the Matrix object, from setup and than into draw (model Matrix)
   modelview=((PGraphicsOpenGL)g).modelview;
  
   //Shader for Environment Mapping
@@ -68,7 +69,7 @@ void setup(){
         }//x=0;
         
         //copy pixels to texture
-        this.set("envmap",get());// Get the display window
+        this.set("envmap",get());
         
         //enable for debug
         //this.set("modelview",((PGraphicsOpenGL)g).modelview);
@@ -90,6 +91,7 @@ void setup(){
       
         //more accurate would be refDir=-normalize(normal);
       + "refDir = reflect(eye, normal);"
+      
 	//vertex animation
       + "camPos.z*=clamp(sin(time)*.5+.5,0,1.);"
 	  
@@ -110,9 +112,9 @@ void setup(){
           this.set("modelviewInv",((PGraphicsOpenGL)g).modelviewInv);
           
           //enable for debug
-          //this.set("modelview",   ((PGraphicsOpenGL)g).modelview);
+          //this.set("modelview", ((PGraphicsOpenGL)g).modelview);
           
-          this.set("projection",  ((PGraphicsOpenGL)g).projection);
+          this.set("projection", ((PGraphicsOpenGL)g).projection);
           return this;  
         }
     }.run();
@@ -129,7 +131,7 @@ float t=0; //time variable
 
 void draw(){
   
-  //millis()*.001f will fail becourse of a floating point error as I suspect
+  //millis()*.001f will fail becourse of a floating point error as I suspect rotateX(cos(
   //for better processing internal behavior use frameCount
   t=frameCount*.01f; 
 
@@ -172,14 +174,14 @@ void draw(){
   //after we apply the transformation to the sphere we update the matrix
   //and going back to the begining of the draw loop -> camera
   
-  //reset to  IdentityMatrix & reset the stack
+  //reset to IdentityMatrix & reset the stack
   model.reset();
   model.apply(modelview.m00, modelview.m10, modelview.m20, modelview.m30,
                                     modelview.m01, modelview.m11, modelview.m21, modelview.m31,
                                     modelview.m02, modelview.m12, modelview.m22, modelview.m32,
                                     modelview.m03, modelview.m13, modelview.m23, modelview.m33);
                                     
-  //load the modelview from stack first then update it
+  //load the modelview from stack & update it
   bgShader.set("view",model);
   sphereShader.set("view",model); 
 
