@@ -53,8 +53,7 @@ void setup(){
         ((PGraphicsOpenGL)g).textureSampling(2);
         
         int x =0;
-        //shader call chain: overload the texure once 
-        //at the higher shader object bgShader
+        //shader call chain: overload the texure at the higher shader object (bgShader)
         //background(0) =
         rectMode(RADIUS);
         fill(x);
