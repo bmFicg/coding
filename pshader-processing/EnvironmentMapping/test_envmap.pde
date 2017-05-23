@@ -9,7 +9,7 @@
 //vertex pre multiplication done by processing 
 //forum.processing.org/two/discussion/11186/edit-stroke-position-and-stroke-color-of-a-pshape-using-shader
  
-
+ 
  
 PShader bgShader, sphereShader;
 
@@ -40,7 +40,7 @@ void setup(){
       + "const float PI ="+(double)PI+";"
       + "void main () {"
       
-       //reindelsoftware.com/Documents/Mapping/Mapping.html
+        //reindelsoftware.com/Documents/Mapping/Mapping.html
       + "fragColor = texture(envmap,"
       +                "vec2(.5+atan(refDir.z,refDir.x)/(2.0*PI),"
       +                        "acos(refDir.y/length(refDir))/PI));"
@@ -88,12 +88,11 @@ void setup(){
       + "vec4 camPos = view*vec4(position, 1);"
       + "vec3 eye = normalize(position.xyz-modelviewInv[3].xyz/modelviewInv[3].w);"
       
-      //more accurate would be refDir=-normalize(normal);
+        //more accurate would be refDir=-normalize(normal);
       + "refDir = reflect(eye, normal);"
-    
-      //some vertex animation    
+	    //vertex animation
       + "camPos.z*=clamp(sin(time)*.5+.5,0,1.);"
-    
+	  
       + "gl_Position = projection*camPos;"
      + "}"
     },new String[]{"#version 150  \n"
@@ -103,14 +102,14 @@ void setup(){
         + "const float PI ="+(double)PI+";"
         + "void main () {"
         
-        //mvps.org/directx/articles/spheremap.htm
+          //mvps.org/directx/articles/spheremap.htm
         + "fragColor = texture(envmap,vec2( .5+asin(refDir.x/PI) ,.5+ asin(refDir.y/PI) ));"
        +"}"
       }){
         PShader run(){
           this.set("modelviewInv",((PGraphicsOpenGL)g).modelviewInv);
           
-          //for debug leave it here
+          //enable for debug
           //this.set("modelview",   ((PGraphicsOpenGL)g).modelview);
           
           this.set("projection",  ((PGraphicsOpenGL)g).projection);
@@ -127,10 +126,11 @@ void setup(){
    //wireframe Mode
    noStroke();
 }
-float t=0;
+float t=0; //time variable
+
 void draw(){
   
-  //millis()*.001f will fail becourse of a floating point error i belive
+  //millis()*.001f will fail becourse of a floating point error as I suspect
   //for better processing internal behavior use frameCount
   t=frameCount*.01f; 
 
@@ -140,9 +140,9 @@ void draw(){
   rotateX(cos(t));rotateZ(sin(t*.01f)/TWO_PI);
   endCamera();
 
-  bgShader.set("Ry", rotY);
+  bgShader.set("Ry", rotY); //rotation pitch
   
-  //reset to IdentityMatrix
+  //reset to  IdentityMatrix
   //reset the stack 
   rotY.reset(); 
   rotY.apply(cos(t), 0,sin(t), 0, 0, 1, 0, 0, -sin(t), 0, cos(t), 0, 0, 0, 0, 1);
@@ -162,6 +162,7 @@ void draw(){
   //readPixels for the previous shader bgShader
   sphereShader.set("envmap",get());
  
+  //enable for debug
   //hint(ENABLE_DEPTH_MASK);
   
   shader(sphereShader);
@@ -169,11 +170,9 @@ void draw(){
   translate(width/2, height/2,-10);
   sphere(120); 
  
+ 
   //after we apply the transformation to the sphere we update the matrix
   //and going back to the begining of the draw loop ->camera
-   //load the modelview from stack first then update it
-  bgShader.set("view",model);
-  sphereShader.set("view",model); 
   
   //reset the stack to IdentityMatrix
   model.reset();
@@ -182,8 +181,12 @@ void draw(){
                                     modelview.m02, modelview.m12, modelview.m22, modelview.m32,
                                     modelview.m03, modelview.m13, modelview.m23, modelview.m33);
                                     
- 
- 
+  //load the modelview from stack first then update it
+  bgShader.set("view",model);
+  sphereShader.set("view",model); 
+
+  
   //enable for debug
   //if(keyPressed||mousePressed)exit();
 }
+
