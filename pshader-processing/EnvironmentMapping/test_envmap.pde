@@ -9,7 +9,7 @@
 //vertex pre multiplication done by processing 
 //forum.processing.org/two/discussion/11186/edit-stroke-position-and-stroke-color-of-a-pshape-using-shader
  
- 
+
  
 PShader bgShader, sphereShader;
 
@@ -21,7 +21,7 @@ PMatrix3D modelview = new PMatrix3D();
 void setup(){
   size(856,480,P3D);
  
- modelview=((PGraphicsOpenGL)g).modelview;
+  modelview=((PGraphicsOpenGL)g).modelview;
  
   //Shader for Environment Mapping
   bgShader=new PShader(this, 
@@ -90,7 +90,10 @@ void setup(){
       
       //more accurate would be refDir=-normalize(normal);
       + "refDir = reflect(eye, normal);"
+    
+    //some vertex animation    
       + "camPos.z*=clamp(sin(time)*.5+.5,0,1.);"
+    
       + "gl_Position = projection*camPos;"
      + "}"
     },new String[]{"#version 150  \n"
@@ -127,7 +130,7 @@ void setup(){
 float t=0;
 void draw(){
   
-  //millis()*.001f will fail becourse of a floating point error as I suspect
+  //millis()*.001f will fail becourse of a floating point error i belive
   //for better processing internal behavior use frameCount
   t=frameCount*.01f; 
 
@@ -139,7 +142,7 @@ void draw(){
 
   bgShader.set("Ry", rotY);
   
-  //reset to  IdentityMatrix
+  //reset to IdentityMatrix
   //reset the stack 
   rotY.reset(); 
   rotY.apply(cos(t), 0,sin(t), 0, 0, 1, 0, 0, -sin(t), 0, cos(t), 0, 0, 0, 0, 1);
@@ -154,13 +157,11 @@ void draw(){
   //enable for debug
   //background(0); 
  
- 
   rect(0, 0, width, height);
   
   //readPixels for the previous shader bgShader
   sphereShader.set("envmap",get());
  
-  
   //hint(ENABLE_DEPTH_MASK);
   
   shader(sphereShader);
@@ -168,9 +169,11 @@ void draw(){
   translate(width/2, height/2,-10);
   sphere(120); 
  
- 
   //after we apply the transformation to the sphere we update the matrix
   //and going back to the begining of the draw loop ->camera
+   //load the modelview from stack first then update it
+  bgShader.set("view",model);
+  sphereShader.set("view",model); 
   
   //reset the stack to IdentityMatrix
   model.reset();
@@ -179,9 +182,7 @@ void draw(){
                                     modelview.m02, modelview.m12, modelview.m22, modelview.m32,
                                     modelview.m03, modelview.m13, modelview.m23, modelview.m33);
                                     
-  //load the modelview from stack first then update it
-  bgShader.set("view",model);
-  sphereShader.set("view",model); 
+ 
  
   //enable for debug
   //if(keyPressed||mousePressed)exit();
