@@ -140,8 +140,9 @@ void draw(){
   rotateX(cos(t)); 
   rotateZ(sin(t*.01f)/TWO_PI);
   endCamera();
-
-  bgShader.set("Ry", rotY); //rotation pitch
+  
+  //rotation pitch
+  bgShader.set("Ry", rotY); 
   
   //reset to  IdentityMatrix & reset the stack 
   rotY.reset(); 
@@ -176,9 +177,9 @@ void draw(){
   //reset to IdentityMatrix & reset the stack
   model.reset();
   model.apply(modelview.m00, modelview.m10, modelview.m20, modelview.m30,
-                                    modelview.m01, modelview.m11, modelview.m21, modelview.m31,
-                                    modelview.m02, modelview.m12, modelview.m22, modelview.m32,
-                                    modelview.m03, modelview.m13, modelview.m23, modelview.m33);
+                             modelview.m01, modelview.m11, modelview.m21, modelview.m31,
+                             modelview.m02, modelview.m12, modelview.m22, modelview.m32,
+                             modelview.m03, modelview.m13, modelview.m23, modelview.m33);
                                     
   //load the modelview from stack & update it
   bgShader.set("view",model);
