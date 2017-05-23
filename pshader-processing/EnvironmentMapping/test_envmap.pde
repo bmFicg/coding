@@ -91,7 +91,7 @@ void setup(){
       //more accurate would be refDir=-normalize(normal);
       + "refDir = reflect(eye, normal);"
     
-    //some vertex animation    
+      //some vertex animation    
       + "camPos.z*=clamp(sin(time)*.5+.5,0,1.);"
     
       + "gl_Position = projection*camPos;"
