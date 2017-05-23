@@ -90,7 +90,7 @@ void setup(){
       
         //more accurate would be refDir=-normalize(normal);
       + "refDir = reflect(eye, normal);"
-	    //vertex animation
+	//vertex animation
       + "camPos.z*=clamp(sin(time)*.5+.5,0,1.);"
 	  
       + "gl_Position = projection*camPos;"
@@ -137,7 +137,8 @@ void draw(){
   beginCamera();
   camera();
   //rotate Camera
-  rotateX(cos(t));rotateZ(sin(t*.01f)/TWO_PI);
+  rotateX(cos(t)); 
+  rotateZ(sin(t*.01f)/TWO_PI);
   endCamera();
 
   bgShader.set("Ry", rotY); //rotation pitch
