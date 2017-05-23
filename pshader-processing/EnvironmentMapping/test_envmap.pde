@@ -24,8 +24,6 @@ void setup(){
     + "out vec4 refDir;"
     + "void main() {"
     + "gl_Position = vec4(position.xy,.0, 1.);"
- 
-    //for reasons for taste i apply the rotation matrix first
     + "refDir =Ry*view*vec4(position.xy,1.,0);"
    + "}"
     }, new String[] {"#version 150  \n"
@@ -42,7 +40,7 @@ void setup(){
     }){
       PShader run(){
  
-        //mode: linear
+        //mode: nearest
         ((PGraphicsOpenGL)g).textureSampling(2);
  
         //somewhere else i run this minimal clear background
@@ -76,7 +74,7 @@ void setup(){
       + "vec4 camPos = view*vec4(position, 1);"
       + "vec3 eye = normalize(position.xyz-modelviewInv[3].xyz/modelviewInv[3].w);"
       + "refDir = reflect(eye, normal);"
-     + "camPos.z*=clamp(sin(time)*.5+.5,0,1.);"
+      + "camPos.z*=clamp(sin(time)*.5+.5,0,1.);"
       + "gl_Position = projection*camPos;"
      + "}"
     },new String[]{"#version 150  \n"
