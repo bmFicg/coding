@@ -118,11 +118,10 @@ void setup(){
     }.run();
  
    //debug: both options off/on
- 
    //enable for debug
+   
    //hint(DISABLE_OPTIMIZED_STROKE);
- 
-   //enable for debug
+
    //wireframe Mode
    noStroke();
 }
@@ -143,8 +142,7 @@ void draw(){
 
   bgShader.set("Ry", rotY); //rotation pitch
   
-  //reset to  IdentityMatrix
-  //reset the stack 
+  //reset to  IdentityMatrix & reset the stack 
   rotY.reset(); 
   rotY.apply(cos(t), 0,sin(t), 0, 0, 1, 0, 0, -sin(t), 0, cos(t), 0, 0, 0, 0, 1);
  
@@ -171,11 +169,10 @@ void draw(){
   translate(width/2, height/2,-10);
   sphere(120); 
  
- 
   //after we apply the transformation to the sphere we update the matrix
-  //and going back to the begining of the draw loop ->camera
+  //and going back to the begining of the draw loop -> camera
   
-  //reset the stack to IdentityMatrix
+  //reset to  IdentityMatrix & reset the stack
   model.reset();
   model.apply(modelview.m00, modelview.m10, modelview.m20, modelview.m30,
                                     modelview.m01, modelview.m11, modelview.m21, modelview.m31,
@@ -190,4 +187,3 @@ void draw(){
   //enable for debug
   //if(keyPressed||mousePressed)exit();
 }
-
