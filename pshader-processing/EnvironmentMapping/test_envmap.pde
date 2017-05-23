@@ -127,7 +127,7 @@ void setup(){
 float t=0;
 void draw(){
   
-  //millis()*.001f will fail becourse of a floating point error i belive
+  //millis()*.001f will fail becourse of a floating point error as I suspect
   //for better processing internal behavior use frameCount
   t=frameCount*.01f; 
 
