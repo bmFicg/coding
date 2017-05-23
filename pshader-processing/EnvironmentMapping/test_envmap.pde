@@ -1,22 +1,30 @@
-//test scetch i made for testing
-//
+//test_envmap.pde
+//05232017
+//@t_vaeringjarson
+//scetch i made for testing
+
+//It is not thought be a physically-accurate reflection shader
+//you have to know about processing intern behavior to tweek values to fit your task
+
 //vertex pre multiplication done by processing 
 //forum.processing.org/two/discussion/11186/edit-stroke-position-and-stroke-color-of-a-pshape-using-shader
  
-PShader bgShader, bunnyShader;
  
+ 
+PShader bgShader, sphereShader;
+
 PMatrix3D rotY=new PMatrix3D();
 PMatrix3D model = new PMatrix3D();
 PMatrix3D modelview = new PMatrix3D(); 
  
-float x =0;
+int x =0;
  
 void setup(){
   size(856,480,P3D);
  
  modelview=((PGraphicsOpenGL)g).modelview;
  
- //Shader for Environment Mapping
+  //Shader for Environment Mapping
   bgShader=new PShader(this, 
     new String[]{"#version 150  \n"
     + "in vec4 position; "
@@ -32,6 +40,7 @@ void setup(){
       + "out vec4 fragColor;"
       + "const float PI ="+(double)PI+";"
       + "void main () {"
+      
        //reindelsoftware.com/Documents/Mapping/Mapping.html
       + "fragColor = texture(envmap,"
       +                "vec2(.5+atan(refDir.z,refDir.x)/(2.0*PI),"
@@ -43,28 +52,33 @@ void setup(){
         //mode: nearest
         ((PGraphicsOpenGL)g).textureSampling(2);
  
-        //somewhere else i run this minimal clear background
+        //shader call chain: overload the texure once 
+        //at the higher shader object bgShader
+        //background(0) =
         rectMode(RADIUS);
         fill(x);
         rect(x,x,width,height);
+        
         //draw grid
         stroke(254);
         while(x<width){
-        x+=20.01f;
+        x+=20;  //at 1080p=96dpi 
         line(x,0,x,height);
         line(0,x,width,x);
-        } //x=0;
- 
-        this.set("envmap",get() );
- 
-       //for debug leave it here
-       //this.set("modelview",((PGraphicsOpenGL)g).modelview);
- 
+        }//x=0;
+        
+        //copy pixels to texture
+        this.set("envmap",get());// Get the display window
+        
+        //enable for debug
+        //this.set("modelview",((PGraphicsOpenGL)g).modelview);
+        
         return this;
         }
     }.run();
-  //Shader for the Processing Shape
-  bunnyShader=new PShader(this, 
+    
+  //Shader for the Processing Shape (sphere)
+  sphereShader=new PShader(this, 
       new String[]{ "#version 150  \n"
       +  "in vec3 position,normal;"
       + "uniform mat4 modelviewInv,view,projection;"
@@ -73,6 +87,8 @@ void setup(){
       + "void main () {"
       + "vec4 camPos = view*vec4(position, 1);"
       + "vec3 eye = normalize(position.xyz-modelviewInv[3].xyz/modelviewInv[3].w);"
+      
+      //more accurate would be refDir=-normalize(normal);
       + "refDir = reflect(eye, normal);"
       + "camPos.z*=clamp(sin(time)*.5+.5,0,1.);"
       + "gl_Position = projection*camPos;"
@@ -83,66 +99,71 @@ void setup(){
         + "out vec4 fragColor;"
         + "const float PI ="+(double)PI+";"
         + "void main () {"
-       /* + "fragColor = texture(envmap,"
-        +                "vec2(.5+atan(refDir.z,refDir.x)/(2.0*PI),"
-        +                        "acos(refDir.y/length(refDir))/PI));"*/
-         //mvps.org/directx/articles/spheremap.htm
+        
+        //mvps.org/directx/articles/spheremap.htm
         + "fragColor = texture(envmap,vec2( .5+asin(refDir.x/PI) ,.5+ asin(refDir.y/PI) ));"
        +"}"
       }){
         PShader run(){
           this.set("modelviewInv",((PGraphicsOpenGL)g).modelviewInv);
- 
+          
           //for debug leave it here
           //this.set("modelview",   ((PGraphicsOpenGL)g).modelview);
- 
+          
           this.set("projection",  ((PGraphicsOpenGL)g).projection);
           return this;  
         }
     }.run();
  
-   //with both options off/on you can see their some weird things happens
+   //debug: both options off/on
  
-   //for debug leave it here
+   //enable for debug
    //hint(DISABLE_OPTIMIZED_STROKE);
  
-   //for debug leave it here
+   //enable for debug
    //wireframe Mode
    noStroke();
 }
 float t=0;
 void draw(){
- 
-  t=frameCount*.04f;
+  
+  //millis()*.001f will fail becourse of a floating point error i belive
+  //for better processing internal behavior use frameCount
+  t=frameCount*.01f; 
+
   beginCamera();
   camera();
   //rotate Camera
   rotateX(cos(t));rotateZ(sin(t*.01f)/TWO_PI);
- endCamera();
-  //load the Identity matrix first PMatrix3D() returns the Identity matrix
-  //is far as i understand it. 
+  endCamera();
+
   bgShader.set("Ry", rotY);
+  
+  //reset to  IdentityMatrix
   //reset the stack 
   rotY.reset(); 
   rotY.apply(cos(t), 0,sin(t), 0, 0, 1, 0, 0, -sin(t), 0, cos(t), 0, 0, 0, 0, 1);
  
   //set time
-  bunnyShader.set("time",t);
+  sphereShader.set("time",t);
  
   //no depth testing
   hint(DISABLE_DEPTH_MASK); 
   shader(bgShader); 
  
-  //for debug leave it here
-  background(0); 
+  //enable for debug
+  //background(0); 
  
-  //RADIUS works best (maybe)
-  rectMode(RADIUS);
+ 
   rect(0, 0, width, height);
-  bunnyShader.set("envmap",get());
+  
+  //readPixels for the previous shader bgShader
+  sphereShader.set("envmap",get());
  
- // hint(ENABLE_DEPTH_MASK);
-  shader(bunnyShader);
+  
+  //hint(ENABLE_DEPTH_MASK);
+  
+  shader(sphereShader);
  
   translate(width/2, height/2,-10);
   sphere(120); 
@@ -150,19 +171,18 @@ void draw(){
  
   //after we apply the transformation to the sphere we update the matrix
   //and going back to the begining of the draw loop ->camera
- 
-   //load the modelview from stack first then update it
-  bgShader.set("view",model);
-  bunnyShader.set("view",model); 
- 
-  //reset the stack 
+  
+  //reset the stack to IdentityMatrix
   model.reset();
   model.apply(modelview.m00, modelview.m10, modelview.m20, modelview.m30,
                                     modelview.m01, modelview.m11, modelview.m21, modelview.m31,
                                     modelview.m02, modelview.m12, modelview.m22, modelview.m32,
                                     modelview.m03, modelview.m13, modelview.m23, modelview.m33);
+                                    
+  //load the modelview from stack first then update it
+  bgShader.set("view",model);
+  sphereShader.set("view",model); 
  
- 
-  //for debug leave it here
+  //enable for debug
   //if(keyPressed||mousePressed)exit();
 }
