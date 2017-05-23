@@ -16,9 +16,8 @@ PShader bgShader, sphereShader;
 PMatrix3D rotY=new PMatrix3D();
 PMatrix3D model = new PMatrix3D();
 PMatrix3D modelview = new PMatrix3D(); 
- 
-int x =0;
- 
+
+
 void setup(){
   size(856,480,P3D);
  
@@ -51,7 +50,8 @@ void setup(){
  
         //mode: nearest
         ((PGraphicsOpenGL)g).textureSampling(2);
- 
+        
+        int x =0;
         //shader call chain: overload the texure once 
         //at the higher shader object bgShader
         //background(0) =
