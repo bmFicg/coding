@@ -17,7 +17,7 @@ Usage:
 ##### //output: reflection_evnmap.pde  
 ![Alt Text](https://68.media.tumblr.com/12856c410d591ac370a9ea3f9d8aae72/tumblr_oqfky81Rlc1tvt5h8o1_540.gif)
 
-***
+
 >                                                                   
 >> credit: test_terrain.obj                                         
 > [HBo](https://forum.processing.org/two/profile/HBo)               
