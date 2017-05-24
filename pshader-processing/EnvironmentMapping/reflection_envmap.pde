@@ -18,7 +18,7 @@ void setup() {
   s=loadShape("https://"+"raw.githubusercontent.com/tolkanabroski/coding/master/pshader-processing/EnvironmentMapping/data/test_terrain.obj");
   s.rotateX(.09);
   
-  //overloading the Matrix object from setup and than into draw (model Matrix)
+  //loading Matrix in setup and than into draw (model Matrix)
   modelview=((PGraphicsOpenGL)g).modelview;
   
   //Shader for Environment Mapping
@@ -51,7 +51,7 @@ void setup() {
       }
     }.run();
 
-	//Shader for the Processing Shape (.obj)
+  //Shader for the Processing Shape (.obj)
   objShader=new PShader(this, 
      new String[]{ "#version 150  \n"
       + "in vec3 position,normal;"
