@@ -1,4 +1,5 @@
 
+this repository was ment to place tutorials
 
 user profile  
 http://www.html5gamedevs.com/profile/21965-nabroski/
