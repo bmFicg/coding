@@ -19,15 +19,7 @@ var normals = require('angle-normals');
 var envmap = regl.texture();
 
 var setupEnvMap = regl({
-  frag: '\n  precision mediump float;
-  uniform sampler2D envmap;
-  varying vec3 reflectDir;
-  void main(){
-  float PI=4.*atan(1.);
-  float lat = atan(reflectDir.z,reflectDir.x), 
-  lon = acos(reflectDir.y/length(reflectDir));
-  gl_FragColor = texture2D(envmap,vec2(.5+lat/(2.0*PI),lon/PI)).xyzw;
-  }',
+  frag: '\n  precision mediump float;uniform sampler2D envmap;varying vec3 reflectDir;void main(){float PI=4.*atan(1.);float lat = atan(reflectDir.z,reflectDir.x), lon = acos(reflectDir.y/length(reflectDir));gl_FragColor = texture2D(envmap,vec2(.5+lat/(2.0*PI),lon/PI)).xyzw;}',
 
   uniforms: {
     envmap: envmap,
