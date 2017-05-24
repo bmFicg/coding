@@ -2,7 +2,7 @@
 
 
 Usage:   
-* `Copy +Paste or download the repository`
+* `Copy +Paste from a RAW file or download the Repository`
 * `Press play`  
 
 
