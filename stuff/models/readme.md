@@ -1,7 +1,7 @@
 sometimes i need models for testing
 
 ##### Winged Victory 
-NOTE: *This 3D Model is decimated using some automatic, some manual techniques* 2.375.035 Bytes
+NOTE: *This 3D Model is decimated using some automatic, some manual techniques*
 
 
 
