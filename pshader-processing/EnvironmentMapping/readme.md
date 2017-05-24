@@ -1,9 +1,16 @@
 ### Environment -and Reflection mapping in Processing 
 ***
 
+Usage:   
+* `Copy +Paste or download the repository`
+* `the & press play`  
+
+   Developed and tested using __Processing 3.3__  :rage3:
+
 ##### //output: test_evnmap.pde  
 
 ![Alt Text](https://68.media.tumblr.com/687befef294bf10bc456b42a151c4b33/tumblr_oqe0xdGFMy1tvt5h8o1_540.gif)
+***
 
 ##### //output: reflection_evnmap.pde  
 ![Alt Text](https://68.media.tumblr.com/12856c410d591ac370a9ea3f9d8aae72/tumblr_oqfky81Rlc1tvt5h8o1_540.gif)
@@ -20,5 +27,5 @@
 > https://flic.kr/p/bGh8jD                                          
 >                                                                   
 >> [Standford Bunny](https://en.wikipedia.org/wiki/Stanford_bunny)  
-> import and export in Blender with smooth shading :cloud:          
+> Import and Export with Smooth Shading using Blender :cloud:         
 >
