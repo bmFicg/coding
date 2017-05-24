@@ -52,7 +52,7 @@ void setup() {
     }.run();
 
 	//Shader for the Processing Shape (.obj)
-	objShader=new PShader(this, 
+  objShader=new PShader(this, 
      new String[]{ "#version 150  \n"
       + "in vec3 position,normal;"
       + "uniform mat4 view,projection;"
