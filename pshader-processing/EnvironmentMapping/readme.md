@@ -6,7 +6,7 @@ Usage:
 * `Press play`  
 
 
-   Developed and tested using __Processing 3.3__  :collision: :rage3:
+   Developed and tested using __Processing 3.3__ 
 
 
 ##### //output: test_evnmap.pde  
