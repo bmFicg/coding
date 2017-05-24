@@ -19,15 +19,15 @@ Usage:
 
 
 >                                                                   
->> credit: test_terrain.obj                                         
+> credit: test_terrain.obj                                         
 > [HBo](https://forum.processing.org/two/profile/HBo)               
 >                                                                   
->> credit: envmap_2.jpg                                             
+> credit: envmap_2.jpg                                             
 > http://www.mtbs3d.com/phpBB/viewtopic.php?f=138&t=16502           
 >                                                                   
->> credit: envmap_1.jpg                                             
+> credit: envmap_1.jpg                                             
 > https://flic.kr/p/bGh8jD                                          
 >                                                                   
->> [Standford Bunny](https://en.wikipedia.org/wiki/Stanford_bunny)  
+> [Standford Bunny](https://en.wikipedia.org/wiki/Stanford_bunny)  
 > Import and Export with Smooth Shading using Blender :cloud:         
 >
