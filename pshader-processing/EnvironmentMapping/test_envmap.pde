@@ -21,7 +21,7 @@ PMatrix3D modelview = new PMatrix3D();
 void setup(){
   size(856,480,P3D);
   
-  //overloading the Matrix object, from setup and than into draw (model Matrix)
+  //loading Matrix in setup and than into draw (model Matrix)
   modelview=((PGraphicsOpenGL)g).modelview;
  
   //Shader for Environment Mapping
