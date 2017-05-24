@@ -3,11 +3,12 @@
 
 Usage:   
 * `Copy +Paste or download the Repository`
-* `Press play`  
+* `Press play` 
 
 
    Developed and tested using [__Processing 3.3.3__](https://github.com/processing/processing/releases/tag/processing-0260-3.3.3) 
 
+further reading: [ozone3d](http://www.ozone3d.net/tutorials/glsl_texturing_p04.php)
 
 ##### //output: test_evnmap.pde  
 
@@ -29,5 +30,5 @@ Usage:
 > https://flic.kr/p/bGh8jD                                          
 >                                                                   
 > [Standford Bunny](https://en.wikipedia.org/wiki/Stanford_bunny)  
-> Import and Export with Smooth Shading using Blender :cloud:         
+> Import and Export with Smooth Shading  :cloud:  using Blender         
 >
