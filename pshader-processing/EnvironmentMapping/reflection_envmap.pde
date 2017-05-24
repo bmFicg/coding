@@ -8,7 +8,7 @@ PMatrix3D modelview = new PMatrix3D();
 void setup() {
   size(856,480,P3D);
   
-  //performance wise i turn it off
+  //performance wise
   noLights();
   noStroke();
   noSmooth();
