@@ -14,7 +14,7 @@ void draw() {
 
   //lights();
   pushMatrix();
-  translate(width/2, height/2)
+  translate(width/2, height/2);
   rotateY(0.52);
   fill(25, 55, 254, 255);
   box(130);
