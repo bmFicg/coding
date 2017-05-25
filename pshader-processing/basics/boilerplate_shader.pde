@@ -1,7 +1,7 @@
 PShader shdr;
 
 void setup() {
-  size(640, 340, P2D);
+  size(640, 360, P2D);
   
   noStroke();
   rectMode(RADIUS);
