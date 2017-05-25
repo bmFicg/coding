@@ -4,10 +4,9 @@ import com.jogamp.opengl.GL2ES2;
 import com.jogamp.opengl.util.GLBuffers;
 import java.nio.FloatBuffer;
 
-FloatBuffer cbuff  =null;
+FloatBuffer cbuff=null;
 PJOGL pgl;
 GL2ES2 gl;
-
 void setup() {
   size(400, 400, P3D);
   noStroke();
@@ -23,17 +22,18 @@ void draw() {
   fill(25, 55, 254, 255);
   box(130);
   popMatrix();
-  
+
   pgl = (PJOGL) beginPGL();  
   gl = pgl.gl.getGL2ES2();
+
   cbuff = GLBuffers.newDirectFloatBuffer(new float[4]);
   gl.glReadPixels(mouseX, mouseY, 1, 1, GL.GL_RGBA, GL.GL_FLOAT, cbuff);
   endPGL();
-  
+
   println(
-  "r:"+(cbuff.get(0)*255)+" "+
-  "g:"+(cbuff.get(1)*255)+" "+
-  "b:"+(cbuff.get(2)*255)+" "+
-  "a:"+(cbuff.get(3)*255)
-  );
+    "r:"+(cbuff.get(0)*255)+" "+
+    "g:"+(cbuff.get(1)*255)+" "+
+    "b:"+(cbuff.get(2)*255)+" "+
+    "a:"+(cbuff.get(3)*255)
+    );
 }
