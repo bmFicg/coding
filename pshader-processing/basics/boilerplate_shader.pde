@@ -22,13 +22,13 @@ void setup() {
      +"}"
       }){
       PShader run(){
-      // 1f fast float cast 
-      this.set("iResolution",new PVector(width*1f,height*1f,Math.min(width,height)*1f));
+      //
+      this.set("iResolution",new PVector(width,height,Math.min(width,height)));
       return this;
       }
     }.run();
-    shader(shdr);
     
+    shader(shdr);
 }
 
 void draw() {
