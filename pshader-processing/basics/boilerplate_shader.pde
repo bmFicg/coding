@@ -6,7 +6,8 @@ void setup() {
   /*noLights();
   noSmooth();
   noStroke();
-  rectMode(RADIUS);*/
+  rectMode(RADIUS);
+  noLoop();*/
   
   shdr=new PShader(this, 
     new String[]{"#version 150 \n"
@@ -30,8 +31,7 @@ void setup() {
     }.run();
     
    shader(shdr);
-  
-   //noLoop();
+   
 }
 
 void draw(){
