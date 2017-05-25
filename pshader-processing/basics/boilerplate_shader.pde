@@ -17,15 +17,15 @@ void setup() {
    + "}"  
     }, new String[]{"#version 150 \n"
       + "out vec4 fragColor;"
-      + "uniform vec3 reso;"
+      + "uniform vec3 sResolution;"
       + "void main() {"
-      + "vec2 p = gl_FragCoord.xy/reso.xy;"
+      + "vec2 p = gl_FragCoord.xy/sResolution.xy;"
       + "fragColor = vec4(vec3(p.x>=p.y),1.);"
      +"}"
       }){
       PShader run(){
-      //  
-      this.set("reso",new PVector(width*.1f,height*.1f,0));
+      // xy. *.1f fake float cast 
+      this.set("sResolution",new PVector(width*.1f,height*.1f,/*aspect ratio*/(width/height)*.1f));
       return this;
       }
     }.run();
