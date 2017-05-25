@@ -1,6 +1,6 @@
 //readPixels with jogl support 
 
- 
+
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2ES2;
 
@@ -13,14 +13,14 @@ void setup() {
 }
 
 void draw() {
-  background(204);
-  
+  background(127, 255);
+
   //lights();
   pushMatrix();
-  translate(width/2, height/2);
-  rotateY(0.52);
+  translate(width/2.0, height/2.0, -150.0);
+  rotateY((frameCount*.1f+0.52)/PI);
   fill(25, 55, 254);
-  box(130);
+  box(150);
   popMatrix();
 
   PJOGL pgl = (PJOGL) beginPGL();  
@@ -29,8 +29,14 @@ void draw() {
   gl.glReadPixels(mouseX, mouseY, 1, 1, GL.GL_RGB, GL.GL_FLOAT, cbuff);
   endPGL();
 
-  println(
-      "r:"+(cbuff.get(0)*255)
-    +" g:"+(cbuff.get(1)*255)
-    +" b:"+(cbuff.get(2)*255));
+  fill(0, 255, 64, 225);
+  textSize(18);
+  textAlign(CENTER, BOTTOM);
+  text(
+    "r: "+(cbuff.get(0)*255)
+    +"\ng:"+(cbuff.get(1)*255)
+    +"\nb:"+(cbuff.get(2)*255), mouseX, mouseY);
+  
+  //
+  //println("r:"+(cbuff.get(0)*255)+" g:"+(cbuff.get(1)*255)+" b:"+(cbuff.get(2)*255));
 }
