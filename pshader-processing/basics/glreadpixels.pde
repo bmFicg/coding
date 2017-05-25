@@ -10,7 +10,7 @@ import java.nio.FloatBuffer;
 void setup() {
   size(640, 360, P3D);
   noStroke();
-}<
+}
 
 void draw() {
   background(204);
