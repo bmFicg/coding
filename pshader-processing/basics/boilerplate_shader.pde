@@ -1,40 +1,37 @@
 PShader shdr;
 
 void setup() {
-  size(640, 360, P3D);
+  size(640, 340, P2D);
   
-  /*noLights();
-  noSmooth();
   noStroke();
   rectMode(RADIUS);
-  noLoop();*/
   
   shdr=new PShader(this, 
     new String[]{"#version 150 \n"
-    + "in vec4 position;"
+    + "in vec2 position;"
     + "void main() {"
     + "gl_Position = vec4(position.xy,0.,1.);"
    + "}"  
     }, new String[]{"#version 150 \n"
       + "out vec4 fragColor;"
-      + "uniform vec3 sResolution;"
+      + "uniform vec3 iResolution;"
       + "void main() {"
-      + "vec2 p = gl_FragCoord.xy/sResolution.xy;"
-      + "fragColor = vec4(vec3(p.x>=p.y),1.);"
+      + "vec2 uvv = (gl_FragCoord.xy*2.-iResolution.xy)/iResolution.z;"
+      + "float cir=.2/length(uvv);"
+      + "fragColor = vec4(vec3(cir),1.);"
      +"}"
       }){
       PShader run(){
-      // xy. *.1f fake float cast 
-      this.set("sResolution",new PVector(width*.1f,height*.1f,/*aspect ratio*/(width/height)*.1f));
+      // 1f fast float cast 
+      this.set("iResolution",new PVector(width*1f,height*1f,Math.min(width,height)*1f));
       return this;
       }
     }.run();
+    shader(shdr);
     
-   shader(shdr);
-   
 }
 
-void draw(){
+void draw() {
   background(0);
   rect(0,0,width,height);
 }
