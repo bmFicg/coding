@@ -3,10 +3,10 @@ PShader shdr;
 void setup() {
   size(640, 360, P3D);
   
-  noLights();
+  /*noLights();
   noSmooth();
   noStroke();
-  rectMode(RADIUS);
+  rectMode(RADIUS);*/
   
   shdr=new PShader(this, 
     new String[]{"#version 150 \n"
