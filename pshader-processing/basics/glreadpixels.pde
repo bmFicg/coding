@@ -27,8 +27,8 @@ void draw() {
   endPGL();
 
   println(
-    "r:"+(cbuff.get(0)*255)+" "+
-    "g:"+(cbuff.get(1)*255)+" "+
-    "b:"+(cbuff.get(2)*255)+" "+
-    "a:"+(cbuff.get(3)*255));
+      "r:"+(cbuff.get(0)*255)
+    +" g:"+(cbuff.get(1)*255)
+    +" b:"+(cbuff.get(2)*255)
+    +" a:"+(cbuff.get(3)*255));
 }
