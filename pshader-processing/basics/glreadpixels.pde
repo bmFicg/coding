@@ -1,4 +1,4 @@
-//readPixels in with jogl support 
+//readPixels with jogl support 
 
  
 import com.jogamp.opengl.GL;
