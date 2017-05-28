@@ -1,8 +1,10 @@
 //WORK IN PROGRESS SHADER
 
 //28.05.2017
-//TO DO FIX TEXTURE FILTERING MODE
-
+//TO DO 
+//FIX TEXTURE FILTERING MODE
+//IMPLEMENT A CAMERA
+//VERTEX DISPLACEMENT
 
 import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.util.GLBuffers;
