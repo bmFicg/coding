@@ -1,0 +1,108 @@
+//28.05.2017
+
+//WORK IN PROGRESS SHADER
+
+import com.jogamp.opengl.GL3;
+import com.jogamp.opengl.util.GLBuffers;
+import java.nio.FloatBuffer;
+
+
+import processing.video.*;
+
+
+Capture cam;
+PShape grid;
+PShader shdr;
+
+{
+  PJOGL.profile = 3;
+}
+
+void setup() {
+  size(640, 480, P2D);
+
+  noSmooth();
+  noStroke();
+
+  //camera setup
+  cam = new Capture(this, 640, 480);
+  cam.start();
+
+  //shape setup
+  grid = createShape();
+  grid.beginShape(QUADS);
+  
+  //Just to be sure i did nothing wrong i disable everything
+  grid.noStroke();  
+  grid.noTexture();
+  grid.noTint();
+
+  //https://github.com/atduskgreg/Processing-Shader-Examples/blob/master/vertex_shader_ripple_plane/description.asciidoc
+  //https://github.com/codeanticode/pshader-experiments/tree/master/MeshTweening
+  int d = 10;
+  for (int x = -1; x < 1; x += d) 
+    for (int y = -1; y < 1; y += d) {
+      grid.attribPosition("vertPos", x, y, 0);
+      grid.vertex(x, y, 0, 0, 1);
+
+      grid.attribPosition("vertPos", x + d, y, 0);
+      grid.vertex(x + d, y, 0, 0, 1);
+
+      grid.attribPosition("vertPos", x + d, y + d, 0); 
+      grid.vertex(x + d, y + d, 0, 0, 1);
+
+      grid.attribPosition("vertPos", x, y + d, 0);   
+      grid.vertex(x, y + d, 0, 0, 1);
+    };
+  grid.endShape();
+
+  //shader setup
+  shdr=new PShader(this, 
+    //vertex
+    new String[]{"#version 150 \n"
+    +"in vec4 vertPos,position;"
+    +"uniform float timer;"
+    +"out vec2 vuv;"
+    +"void main(){"
+    +"mat3 rotation = mat3("
+    +    "vec3( cos(timer),  sin(timer),  0.0),"
+    +    "vec3(-sin(timer),  cos(timer),  0.0),"
+    +    "vec3(        0.0,         0.0,  1.0));"
+    +"vec4 npos=vec4(rotation * vec3(position.xy,0.), 1.0);"
+    +"gl_Position = npos;"
+    +"vuv=-npos.xy*vec2(0.5)+vec2(0.5);"
+    +"}"
+    //fragment
+    }, new String[]{"#version 150 \n"
+      +"in vec2 vuv;"
+      +"uniform sampler2D tex;"
+      +"out vec4 fragColor;"
+      +"void main() {"
+      + "fragColor = texture(tex,vuv);"
+      //red
+      //+ "fragColor = vec4(1.0,0.0,0.0,1.0);" 
+      +"}"
+    });
+  shader(shdr);
+}
+
+FloatBuffer clearColor = GLBuffers.newDirectFloatBuffer(4);
+
+void draw() {
+
+  PJOGL pgl = (PJOGL) beginPGL();  
+  GL3 gl = pgl.gl.getGL3();
+  gl.glClearBufferfv(GL3.GL_COLOR, 0, clearColor.put(0, 0.2f).put(1, 0.2f).put(2, 0.5f).put(3, 0f));
+  endPGL();
+
+  if (cam.available()) cam.read();
+  shdr.set("tex", cam);
+
+  shdr.set("timer", frameCount*.01f);
+
+  // see above
+  grid.disableStyle();
+
+  //draw shape
+  shape(grid);
+}
