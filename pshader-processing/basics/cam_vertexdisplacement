@@ -35,32 +35,20 @@ void setup() {
 
   //shape setup
   grid = createShape();
-  grid.beginShape(QUADS);
-
+  grid.beginShape(QUAD);
   //Just to be sure i did nothing wrong i disable everything
   grid.noStroke();  
   grid.noTexture();
   grid.noTint();
-  
-  //https://github.com/atduskgreg/Processing-Shader-Examples/blob/master/vertex_shader_ripple_plane/description.asciidoc
-  //https://github.com/codeanticode/pshader-experiments/tree/master/MeshTweening
-  int d = 2;
-  for (int x = -1; x < 1; x += d) 
-    for (int y = -1; y < 1; y += d) {
-     
-      grid.attribPosition("vertPos", x, y, 0);
-      grid.vertex(0, 0, 0);
-  
-      grid.attribPosition("vertPos", x + d, y, 0);
-      grid.vertex(0, 0, 0);
-
-      grid.attribPosition("vertPos", x + d, y + d, 0); 
-      grid.vertex(0,0, 0);
-
-      grid.attribPosition("vertPos", x, y + d, 0);   
-      grid.vertex(0, 0, 0);
-    };grid.endShape();
-
+  grid.attribPosition("vertPos", -1, -1, 0);
+  grid.vertex(0,0);
+  grid.attribPosition("vertPos",1, -1, 0);
+  grid.vertex(0,0);
+  grid.attribPosition("vertPos", 1, 1, 0); 
+  grid.vertex(0,0);
+  grid.attribPosition("vertPos", -1, 1, 0);
+  grid.vertex(0,0);
+  grid.endShape();
 
   //shader setup
   shdr=new PShader(this, 
