@@ -44,22 +44,24 @@ void setup() {
   
   //https://github.com/atduskgreg/Processing-Shader-Examples/blob/master/vertex_shader_ripple_plane/description.asciidoc
   //https://github.com/codeanticode/pshader-experiments/tree/master/MeshTweening
-  int d = 10;
-  for (int x = -125; x < 125; x += d) 
-    for (int y = -125; y < 125; y += d) {
+    int d = 10;
+  for (int x = -1; x < 1; x += d) 
+    for (int y = -1; y < 1; y += d) {
+     
       grid.attribPosition("vertPos", x, y, 0);
-      grid.vertex(x, y, 0, 0, 1);
-
+      grid.vertex(0, 0, 0);
+  
       grid.attribPosition("vertPos", x + d, y, 0);
-      grid.vertex(x + d, y, 0, 0, 1);
+      grid.vertex(0, 0, 0);
 
       grid.attribPosition("vertPos", x + d, y + d, 0); 
-      grid.vertex(x + d, y + d, 0, 0, 1);
+      grid.vertex(0,0, 0);
 
       grid.attribPosition("vertPos", x, y + d, 0);   
-      grid.vertex(x, y + d, 0, 0, 1);
+      grid.vertex(0, 0, 0);
     };
   grid.endShape();
+
 
   //shader setup
   shdr=new PShader(this, 
