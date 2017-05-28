@@ -44,7 +44,7 @@ void setup() {
   
   //https://github.com/atduskgreg/Processing-Shader-Examples/blob/master/vertex_shader_ripple_plane/description.asciidoc
   //https://github.com/codeanticode/pshader-experiments/tree/master/MeshTweening
-    int d = 10;
+  int d = 2;
   for (int x = -1; x < 1; x += d) 
     for (int y = -1; y < 1; y += d) {
      
@@ -59,8 +59,7 @@ void setup() {
 
       grid.attribPosition("vertPos", x, y + d, 0);   
       grid.vertex(0, 0, 0);
-    };
-  grid.endShape();
+    };grid.endShape();
 
 
   //shader setup
