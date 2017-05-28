@@ -25,7 +25,7 @@ void setup() {
   size(640, 480, P2D);
 
   noSmooth();
-  noStroke();
+  //noStroke();
 
   //camera setup
   cam = new Capture(this, 640, 480);
@@ -36,15 +36,15 @@ void setup() {
   grid.beginShape(QUADS);
 
   //Just to be sure i did nothing wrong i disable everything
-  grid.noStroke();  
+  //grid.noStroke();  
   grid.noTexture();
   grid.noTint();
-
+  
   //https://github.com/atduskgreg/Processing-Shader-Examples/blob/master/vertex_shader_ripple_plane/description.asciidoc
   //https://github.com/codeanticode/pshader-experiments/tree/master/MeshTweening
   int d = 10;
-  for (int x = -1; x < 1; x += d) 
-    for (int y = -1; y < 1; y += d) {
+  for (int x = -125; x < 125; x += d) 
+    for (int y = -125; y < 125; y += d) {
       grid.attribPosition("vertPos", x, y, 0);
       grid.vertex(x, y, 0, 0, 1);
 
@@ -95,10 +95,11 @@ void draw() {
   gl.glClearBufferfv(GL3.GL_COLOR, 0, clearColor.put(0, 0.2f).put(1, 0.2f).put(2, 0.5f).put(3, 0f));
   endPGL();
 
-  float phi  =  map(mouseX, 0, width, 0, 1);
-  float theta=  map(mouseX, 0, width, 0, 1);
+  float phi  =  map(mouseX, 0, width, PI, TWO_PI);
+  float theta=  map(mouseY, 0, height,PI, TWO_PI);
   float psi =   t; 
-
+  
+  
   shdr.set("RotMat",rotMat); 
   
   rotMat.reset(); 
