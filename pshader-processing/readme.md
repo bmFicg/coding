@@ -1,4 +1,3 @@
-based on a **JOGL** [tutorial](http://jogamp.org/git/?p=jogl-demos.git;a=blob;f=src/demos/es2/RawGL2ES2demo.java)
+i will push this repro to master as soon as i feel it is ready. 
 
-# RAW (incomplete)
-https://gist.github.com/tolkanabroski/aeeab6d8887555365dc69c3062d9c487
+meanwhile you can click to view the source and copy +paste.
