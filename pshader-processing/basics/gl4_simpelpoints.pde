@@ -83,19 +83,15 @@ void draw() {
   gl.glUniform1f(loctime, millis()*.001f); 
 
   gl.glDrawArrays(GL4.GL_POINTS, 0, 3);
-
+ 
+  //click on an area outside will exit the scetch
+  if(!focused){
+    println("cleanup... exit");
+    gl.glUseProgram(0);
+    gl.glDeleteBuffers(1, vao, 0);
+    gl.glDeleteVertexArrays(1, vaobuff);
+    gl.glDeleteProgram(shaderProgram);
+    exit();
+  }
   endPGL();
-
-  if (keyPressed == true||mousePressed == true) end();
-}
-
-void end() {
-  println("cleanup... exit");
-  GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
-  gl.glUseProgram(0);
-  gl.glDeleteBuffers(1, vao, 0);
-  gl.glDeleteVertexArrays(1, vaobuff);
-  gl.glDeleteProgram(shaderProgram);
-  endPGL();
-  exit();
 }
