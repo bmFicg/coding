@@ -35,7 +35,7 @@ void setup() {
   int vertShader = gl.glCreateShader(GL4.GL_VERTEX_SHADER);
   gl.glShaderSource(vertShader, 1, 
     new String[]{"#version 420 \n"
-    +"void main(void){"
+    +"void main(void) {"
     +"gl_Position = vec4(0.0,0.5,0.0,1.0);}" }, null);
   gl.glCompileShader(vertShader);
 
