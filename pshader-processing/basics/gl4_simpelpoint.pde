@@ -11,6 +11,7 @@ int shaderProgram;
 int loctime;
 
 int[] vao;
+
 IntBuffer vaobuff = GLBuffers.newDirectIntBuffer(1);
 
 void settings() {
@@ -27,8 +28,7 @@ void setup() {
     new String[]{"#version 420 \n"
     +"out vec4 fragColor;"
     +"void main(void) {"
-    +"fragColor = vec4(0.2, 0.2, 0.5, 1.0);"
-    +"}"}, null);
+    +"fragColor = vec4(0.2, 0.2, 0.5, 1.0);"} }, null);
   gl.glCompileShader(fragShader);
 
   //create vertShader Shader
@@ -36,8 +36,7 @@ void setup() {
   gl.glShaderSource(vertShader, 1, 
     new String[]{"#version 420 \n"
     +"void main(void){"
-    +"gl_Position = vec4(0.0,0.5,0.0,1.0);"
-    +"}"}, null);
+    +"gl_Position = vec4(0.0,0.5,0.0,1.0);}" }, null);
   gl.glCompileShader(vertShader);
 
   //attach and link
