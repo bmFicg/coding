@@ -61,7 +61,8 @@ void draw() {
   gl.glUseProgram(shaderProgram);
   gl.glPointSize(25f);
   gl.glDrawArrays(GL4.GL_POINTS, 0, 1);
-
+  
+  //click on area outside the scetch window to exit
   if (!focused){
     println("cleanup... exit");
     gl.glUseProgram(0);
