@@ -84,7 +84,7 @@ void draw() {
 
   gl4.glDrawArrays(GL4.GL_POINTS, 0, 3);
  
-  //click on an area outside will exit the scetch
+  //click on an area outside will exit the scetch 
   if(!focused){
     println("cleanup... exit");
     gl4.glUseProgram(0);
