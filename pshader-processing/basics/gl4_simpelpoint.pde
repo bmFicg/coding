@@ -10,7 +10,7 @@ int[] vao;
 IntBuffer vaobuff = GLBuffers.newDirectIntBuffer(1);
 
 void settings() {
-  size(400, 400, P3D);
+  size(256,256, P3D);
   PJOGL.profile = 4;
 }
 
@@ -59,13 +59,13 @@ void draw() {
   GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
   gl.glClearBufferfv(GL4.GL_COLOR, 0, clearcolor.put(0, 1f).put(1, 0f).put(2, 0f).put(3, 1f));
   gl.glUseProgram(shaderProgram);
-  gl.glPointSize(40f);
+  gl.glPointSize(25f);
   gl.glDrawArrays(GL4.GL_POINTS, 0, 1);
 
-  if (!focused) {
+  if (!focused){
     println("cleanup... exit");
     gl.glUseProgram(0);
-    gl.glDeleteBuffers(1, vao, 0);
+    gl.glDeleteBuffers(1,vao,0);
     gl.glDeleteVertexArrays(1, vaobuff);
     gl.glDeleteProgram(shaderProgram);
     exit();
