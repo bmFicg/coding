@@ -68,7 +68,7 @@ void draw() {
                                   
   gl.glUseProgram(shaderProgram);
   
-  gl.glPointSize(width/2f);
+  gl.glPointSize((sin(frameCount*.01f)*.5f+.5f)*width/2f);
   gl.glDrawArrays(GL4.GL_POINTS, 0, 1);
   
   endPGL();
