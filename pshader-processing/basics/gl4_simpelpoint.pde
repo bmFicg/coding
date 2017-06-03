@@ -24,7 +24,7 @@ void setup() {
     new String[]{"#version 420 \n"
     +"out vec4 fragColor;"
     +"void main(void) {"
-    +"fragColor = vec4(0.2, 0.2, 0.5, 1.0);"} }, null);
+    +"fragColor = vec4(0.2, 0.2, 0.5, 1.0);}" }, null);
   gl.glCompileShader(fragShader);
 
   //create vertShader Shader
