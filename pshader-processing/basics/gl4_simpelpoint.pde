@@ -63,16 +63,16 @@ void draw() {
   //khronos.org/opengl/wiki/GLAPI/glClearBuffer
   gl.glClearBufferfv(
                   GL4.GL_COLOR, 
-                  GL4.GL_DRAW_BUFFER0, 
+                  0, 
                   GLBuffers.newDirectFloatBuffer(
                       new float[]{sin(frameCount*.01f)*.5f+.5f, 
-                                  cos( frameCount*.01f )*.5f+.5f, 
+                                  cos(frameCount*.01f)*.5f+.5f, 
                                   0.0f, 
                                   1.0f}));
                                   
   gl.glUseProgram(shaderProgram);
   
-  gl.glPointSize(width/2.f);
+  gl.glPointSize(width/2f);
   gl.glDrawArrays(GL4.GL_POINTS, 0, 1);
   
   endPGL();
