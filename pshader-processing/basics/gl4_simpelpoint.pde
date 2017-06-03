@@ -3,21 +3,17 @@
 import com.jogamp.opengl.util.GLBuffers;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-
 import com.jogamp.opengl.GL4;
 
 int shaderProgram;
-//uniform loc 
-int loctime;
-
 int[] vao;
-
 IntBuffer vaobuff = GLBuffers.newDirectIntBuffer(1);
 
 void settings() {
   size(640, 360, P3D);
   PJOGL.profile = 4;
 }
+
 void setup() {
   GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
   shaderProgram = gl.glCreateProgram();
@@ -58,6 +54,7 @@ void setup() {
 }
 
 FloatBuffer clearcolor = GLBuffers.newDirectFloatBuffer(4);
+
 void draw() {
   GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
   gl.glClearBufferfv(GL4.GL_COLOR, 0, clearcolor.put(0, 1f).put(1, 0f).put(2, 0f).put(3, 1f));
