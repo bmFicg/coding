@@ -10,7 +10,7 @@ int[] vao;
 IntBuffer vaobuff = GLBuffers.newDirectIntBuffer(1);
 
 void settings() {
-  size(640, 360, P3D);
+  size(400, 400, P3D);
   PJOGL.profile = 4;
 }
 
