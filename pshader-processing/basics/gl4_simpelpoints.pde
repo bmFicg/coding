@@ -1,5 +1,3 @@
-
-
 import  com.jogamp.opengl.GL4;
 import com.jogamp.opengl.util.GLBuffers;
 import java.nio.FloatBuffer;
@@ -35,7 +33,7 @@ void setup() {
     +"}"}, null); //no error check
   gl.glCompileShader(fragShader);
   
-  //tutorialspoint.com/webgl/webgl_drawing_points.htm
+  //based on: tutorialspoint.com/webgl/webgl_drawing_points.htm
   
   //create vertShader Shader
   int vertShader = gl.glCreateShader(GL4.GL_VERTEX_SHADER);
@@ -43,10 +41,9 @@ void setup() {
     new String[]{"#version 420 \n"
     +"uniform float t; \n" 
     +"void main(void){"
-    +"const vec3 points[3]=vec3[3]("
-    +"vec3(-0.5,0.5*sin(t),0.0),"
-    +"vec3(0.0,0.5,0.0),"
-    +"vec3(-0.25,0.25,0.0));"
+    +"vec3 points[3]=vec3[3](vec3(-0.5,0.5*sin(t),0.0),"
+                           +"vec3(0.2*cos(t),0.5,0.0),"
+                           +"vec3(-0.5*sin(t),0.25,0.0));"
     +"gl_Position = vec4(points[gl_VertexID],1.);"
     +"}"}, null); //no error check
   gl.glCompileShader(vertShader);
