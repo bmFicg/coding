@@ -57,8 +57,8 @@ void setup() {
 
   endPGL();
 }
-FloatBuffer clearcolor = GLBuffers.newDirectFloatBuffer(4);
 
+FloatBuffer clearcolor = GLBuffers.newDirectFloatBuffer(4);
 void draw() {
   GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
   gl.glClearBufferfv(GL4.GL_COLOR, 0, clearcolor.put(0, 1f).put(1, 0f).put(2, 0f).put(3, 1f));
