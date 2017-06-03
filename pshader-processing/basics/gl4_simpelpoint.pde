@@ -61,14 +61,10 @@ void draw() {
   GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
   
   //khronos.org/opengl/wiki/GLAPI/glClearBuffer
-  gl.glClearBufferfv(
-                  GL4.GL_COLOR, 
-                  0, 
-                  GLBuffers.newDirectFloatBuffer(
-                      new float[]{sin(frameCount*.01f)*.5f+.5f, 
-                                  cos(frameCount*.01f)*.5f+.5f, 
-                                  0.0f, 
-                                  1.0f}));
+  gl.glClearBufferfv(GL4.GL_COLOR, 0, 
+                     GLBuffers.newDirectFloatBuffer(
+                        new float[]{sin(frameCount*.01f)*.5f+.5f, 
+                                    cos(frameCount*.01f)*.5f+.5f, 0.0f, 1.0f}));
                                   
   gl.glUseProgram(shaderProgram);
   
