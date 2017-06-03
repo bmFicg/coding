@@ -56,7 +56,7 @@ void setup() {
   //uniform location
   loctime=gl.glGetUniformLocation(shaderProgram, "t");
 
-  //the program should compiled now and we can free the shaders
+  //program compiled and we can free the shaders
   gl.glDeleteShader(vertShader);
   gl.glDeleteShader(fragShader);
 
