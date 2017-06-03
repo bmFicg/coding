@@ -14,6 +14,7 @@ void settings() {
 }
 
 void setup() {
+  
   GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
   
   shaderProgram = gl.glCreateProgram();
@@ -25,23 +26,24 @@ void setup() {
     +"out vec4 color;"
     +"void main(void) {"
     +"color = vec4(0.2, 0.2, 0.5, 1.0);"
-    +"}"}, null);
+    +"}"}, null); //no error check
   gl.glCompileShader(fragShader);
   
   //create vertShader Shader
   int vertShader = gl.glCreateShader(GL4.GL_VERTEX_SHADER);
   gl.glShaderSource(vertShader, 1, 
-  new String[]{"#version 420 \n"
+    new String[]{"#version 420 \n"
     +"void main(void){"
     +"gl_Position = vec4(0.0, 0.0, 0.0, 1.0);"
-    +"}"}, null);
+    +"}"}, null); //no error check
   gl.glCompileShader(vertShader);
   
+  //attach and link
   gl.glAttachShader(shaderProgram, vertShader);
   gl.glAttachShader(shaderProgram, fragShader);
   gl.glLinkProgram(shaderProgram);
   
-  //
+  //the program should compiled now and we can free the shaders
   gl.glDeleteShader(vertShader);
   gl.glDeleteShader(fragShader);
   
@@ -57,10 +59,22 @@ void setup() {
 }
 void draw() {
   GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
-  gl.glClearBufferfv(GL4.GL_COLOR, 0, GLBuffers.newDirectFloatBuffer(new float[]{sin(frameCount*.01f)*.5f+.5f, cos( frameCount*.01f )*.5f+.5f, 0.0f, 1.0f}));
+  
+  //khronos.org/opengl/wiki/GLAPI/glClearBuffer
+  gl.glClearBufferfv(
+                  GL4.GL_COLOR, 
+                  GL4.GL_DRAW_BUFFER0, 
+                  GLBuffers.newDirectFloatBuffer(
+                      new float[]{sin(frameCount*.01f)*.5f+.5f, 
+                                  cos( frameCount*.01f )*.5f+.5f, 
+                                  0.0f, 
+                                  1.0f}));
+                                  
   gl.glUseProgram(shaderProgram);
+  
   gl.glPointSize(width/2.f);
   gl.glDrawArrays(GL4.GL_POINTS, 0, 1);
+  
   endPGL();
 }
 
