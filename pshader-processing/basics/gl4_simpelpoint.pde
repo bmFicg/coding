@@ -4,6 +4,9 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 int shaderProgram;
+//uniform loc 
+int loctime;
+
 int[] vao;
 
 IntBuffer vaobuff = GLBuffers.newDirectIntBuffer(1);
@@ -17,6 +20,7 @@ void setup() {
   
   GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
   
+  //create the program object 
   shaderProgram = gl.glCreateProgram();
   
   //create fragment Shader
@@ -33,8 +37,9 @@ void setup() {
   int vertShader = gl.glCreateShader(GL4.GL_VERTEX_SHADER);
   gl.glShaderSource(vertShader, 1, 
     new String[]{"#version 420 \n"
+    +"uniform float time; \n" 
     +"void main(void){"
-    +"gl_Position = vec4(0.0, 0.0, 0.0, 1.0);"
+    +"gl_Position = vec4(0.0, sin(time)*.5+.5, 0.0, 1.0);"
     +"}"}, null); //no error check
   gl.glCompileShader(vertShader);
   
@@ -42,6 +47,9 @@ void setup() {
   gl.glAttachShader(shaderProgram, vertShader);
   gl.glAttachShader(shaderProgram, fragShader);
   gl.glLinkProgram(shaderProgram);
+  
+  //uniform location
+  loctime=gl.glGetUniformLocation(shaderProgram,"time");
   
   //the program should compiled now and we can free the shaders
   gl.glDeleteShader(vertShader);
@@ -69,12 +77,17 @@ void draw() {
   gl.glUseProgram(shaderProgram);
   
   gl.glPointSize((sin(frameCount*.01f)*.5f+.5f)*width/2f);
+  
+  gl.glUniform1f(loctime,millis()*.001f); 
+   
   gl.glDrawArrays(GL4.GL_POINTS, 0, 1);
   
   endPGL();
+  
+  if (keyPressed == true||mousePressed == true) end();
 }
 
-void mousePressed() {
+void end() {
   println("cleanup... exit");
   GL4 gl = ((PJOGL)beginPGL()).gl.getGL4();
   gl.glUseProgram(0);
