@@ -5,7 +5,7 @@ int main() {
 	int width = 640;
 	int height = 360;
 
-	std::ofstream outFile("test.ppm", std::ios::binary);
+	std::ofstream outFile("test.ppm");
 
 	//http://netpbm.sourceforge.net/doc/ppm.html
 	outFile << "P3\n" << width << " " << height << "\n255\n";
