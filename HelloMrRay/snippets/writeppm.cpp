@@ -13,9 +13,7 @@ int main() {
 	for (int j = height - 1; j >= 0; j--) {
 		for (int i = 0; i < width; i++) {
 			//RGB
-			outFile << (255 * i / width) << " "
-				<< (255 * j / height) << " "
-				<< (255 * 0.2f) << "\n";
+			outFile << (255 * i / width) << " "<< (255 * j / height) << " "<< (255 * 0.2f) << "\n";
 		}
 	}
 }
