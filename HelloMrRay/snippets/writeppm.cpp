@@ -17,3 +17,9 @@ int main() {
 		}
 	}
 }
+
+/* one liner
+#include <fstream>
+int main( ) {int w=640,h=360;std::ofstream o("test.ppm");o << "P3\n" << w << " " << h << "\n255\n";for(int j=h;j-->=0;)for(int i=0;i++<w;)o<<255*i/w<<" "<<255*j/h<<" "<<255*.2f<<"\n";
+}
+*/
