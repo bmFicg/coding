@@ -20,5 +20,8 @@ int main() {
 
 /* one liner
 #include <fstream>
-int main(){int w=640,h=360;std::ofstream o("test.ppm");o<<"P3\n"<<w<<" "<<h<<"\n255\n";for(int j=h;j-->=0;)for(int i=0;i++<w;)o<<255*i/w<<" "<<255*j/h<<" "<<255*.2f<<"\n";}
+#include <cstring>
+ int main (int argc, char *argv[]) {std::ofstream o(std::strcat(argv[0],".ppm"));o << "P3\n640 360\n255\n";for (int j = 360;j-- >= 0;)for (int i = 0;i++ <640;)
+	o << 255 * i / 640 << std::endl << 255 * j / 360 << std::endl << 255 * .2f << std::endl; }
+//g++ source.cpp -o test
 */
