@@ -45,7 +45,7 @@ require('resl')({
   
 	onDone: ({texture}) => {
 		regl.frame(() => {
-			regl.clear({color: [127, 127, 127, 255],})
+			regl.clear({color: [0.5, 0.5, 0.5, 1.0],})
 			draw({texture})
 		})
 	}
