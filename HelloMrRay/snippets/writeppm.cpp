@@ -2,15 +2,13 @@
 
 int main() {
 
-	int width = 640;
-	int height = 360;
+	int width = 640,height = 360;
+	
+	std::ofstream o("test.ppm");
 
-	std::ofstream outFile("test.ppm");
+	o << "P3\n" << width << " " << height << "\n255\n";
 
-	//http://netpbm.sourceforge.net/doc/ppm.html
-	outFile << "P3\n" << width << " " << height << "\n255\n";
-
-	for (int j = height-1;j-- >= 0;) {
+	for (int j = height - 1;j-- >= 0;) {
 		for (int i = 0; i++ < width;)
 			o << int(255.99 * i / width) << " " << int(255.99 * j / height) << " " << int(255.99 *.2) << "\n";
 	}
