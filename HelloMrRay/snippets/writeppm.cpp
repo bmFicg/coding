@@ -10,11 +10,11 @@ int main() {
 	//http://netpbm.sourceforge.net/doc/ppm.html
 	outFile << "P3\n" << width << " " << height << "\n255\n";
 
-	for (float j = height-1.f;j-- >= 0;) {
-		for (float i = 0; i++ < width;)
-			o << int(255.99 * i / width) << " " << int(255.99 * j / height) << " " << int(255.99 *0.2) << "\n";
+	for (int j = height-1;j-- >= 0;) {
+		for (int i = 0; i++ < width;)
+			o << int(255.99 * i / width) << " " << int(255.99 * j / height) << " " << int(255.99 *.2) << "\n";
 	}
-	o.flush();
+	std::flush(o);
 }
 
 /* one liner
