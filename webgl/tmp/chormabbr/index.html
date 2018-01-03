@@ -35,7 +35,7 @@
   gl.canvas.width =canvas.clientWidth;
   gl.canvas.height= canvas.clientHeight;
   var image = new Image();
-  image.src = "prof_pixD.png";
+  image.src = "https://raw.githubusercontent.com/tolkanabroski/coding/master/webgl/tmp/chormabbr/prof_pixD.png";
   var texture = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 1, 1, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
