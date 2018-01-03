@@ -1,1 +1,124 @@
 
+<!doctype html>
+  <html>
+  <head>
+  <title>chromabb test</title>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+  <link rel="icon" href="data:;base64,=">
+  <style>
+  html,body {
+  border: 0;
+  margin: 0;
+  background-color: lightgrey;
+  }
+  #c {
+  padding: 0;
+  margin: auto;
+  display: block;
+  width: 640px;
+  height: 640px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;}
+  }
+</style>
+  <script>
+  window.addEventListener('DOMContentLoaded', function () {
+  
+  "use strict";
+  const canvas = document.getElementById('c');
+  const options ={alpha:false, depth:false, stencil:false, antialias:false, presereDrawingBuffer:false, failIfMajorPerformanceCaveat:false, premultipliedAlpha:false};
+  const gl = canvas.getContext('webgl', options) || canvas.getContext("experimental-webgl", options[options.length -1]);
+  if (!gl) throw 'Unable to initialize WebGL. Your browser or machine may not support it.';
+  gl.canvas.width =canvas.clientWidth;
+  gl.canvas.height= canvas.clientHeight;
+  var image = new Image();
+  image.src = "prof_pixD.png";
+  var texture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 1, 1, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
+  image.addEventListener("load", function () {
+  // gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.bindTexture(gl.TEXTURE_2D, null);
+  
+  const P=gl.createProgram();
+  // vertex
+  var A=gl.createShader(gl.VERTEX_SHADER);
+  gl.shaderSource(A,`#version 100\n 
+  precision mediump float;
+  attribute vec2 position;
+  varying vec2 vuv;
+  void main() {
+  vuv = position*.5+.5;
+  gl_Position = vec4(position, 0.0, 1.0);
+  }`);
+gl.compileShader(A);
+// if (!gl.getShaderParameter(A, gl.COMPILE_STATUS)) throw '!V.E.R.T:' + gl.getShaderInfoLog(A);
+
+gl.attachShader(P, A);
+gl.deleteShader(A);
+
+// fragment 
+gl.shaderSource(A=gl.createShader(gl.FRAGMENT_SHADER), 
+  `#version 100\n
+  precision mediump float;
+  uniform float t_;
+  uniform sampler2D tex;
+  varying vec2 vuv;
+  void main() {
+  vec2 p = vec2(vuv.x, 1.-vuv.y);
+  float amount = 0.0;
+  amount = pow(sin(t_*3.0)*.5+.5,6.0)*0.1;
+  lowp vec3 col=vec3(1., 1., 1.);
+  col = vec3(texture2D( tex, vec2(p.x+amount, p.y+.001 ) ).r,texture2D( tex, p+vec2(.0,-.009) ).g,texture2D( tex, vec2((p.x-.001)-amount, p.y+.0091 ) ).b);
+  col *= (1.0 - amount * 0.5);
+  gl_FragColor =  vec4(col, 1.0);
+  }`);
+  gl.compileShader(A);
+// if (!gl.getShaderParameter(A, gl.COMPILE_STATUS)) throw '!F.R.A.G:' + gl.getShaderInfoLog(A);
+gl.attachShader(P, A);
+gl.deleteShader(A);
+
+
+gl.linkProgram(P); 
+gl.detachShader(P, A);
+
+gl.useProgram(P);
+
+
+gl.bindBuffer(A=gl.ARRAY_BUFFER, gl.createBuffer());
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 2, gl.BYTE, 0, 0, 0);
+gl.bufferData(A, new Int8Array([-3, 1, 1, -3, 1, 1]), gl.STATIC_DRAW)
+
+
+gl.clearColor(0.0, 0.0, 0.0, 1.0);
+gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+
+
+var a =0;
+var reqFrame = window.requestAnimationFrame; 
+function anim() {
+	gl.activeTexture(gl.TEXTURE0);
+	gl.bindTexture(gl.TEXTURE_2D, texture);
+	gl.clear(gl.COLOR_BUFFER_BIT);
+	gl.uniform1i(gl.getUniformLocation(P, "tex"), 0);
+	gl.uniform1f(gl.getUniformLocation(P, 't_'), a++*0.01);
+	gl.drawArrays(gl.TRIANGLE_FAN, 0, 3);
+	reqFrame(anim);};
+	reqFrame(anim);
+	})
+  });
+</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+</body>
+</html>
