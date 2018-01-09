@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 public class MyProject extends JFrame implements GLEventListener {
 
 	public MyProject() {
-			
+		
 			setTitle("Test");
 			setSize(640,360);
 			// setLocation(800,100);
@@ -28,12 +28,12 @@ public class MyProject extends JFrame implements GLEventListener {
 		}
 	
 	public static void main(String[]args){
-			new	MyProject();
+			new MyProject();
 		}
 	
 	public void init(GLAutoDrawable drawable) {
 			
-			 GL4 gl=(GL4bc)GLContext.getCurrentGL();
+			GL4 gl=(GL4bc)GLContext.getCurrentGL();
 			
 			final int shdrProgram =gl.glCreateProgram();
 			
@@ -66,7 +66,7 @@ public class MyProject extends JFrame implements GLEventListener {
 		
 	public void display(GLAutoDrawable drawable) {
 		
-		GL4	gl=(GL4bc)GLContext.getCurrentGL();
+		GL4 gl=(GL4bc)GLContext.getCurrentGL();
 		
 		gl.glClearBufferfv(GL_COLOR, 0,Buffers.newDirectFloatBuffer(new float[]{1.f,0.f,0.f,1.f}));
 		
